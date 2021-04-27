@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://localhost/pos/pos-lib/css/login_style.css">
+  <link rel="stylesheet" type="text/css" href="http://localhost/pos/pos-lib/css/common_style.css">
+  <link rel="stylesheet" type="text/css" href="http://localhost/pos/pos-lib/css/progressbar.css">
+</head>
+
+<body>
+  <h2>AnIT POS</h2>
+  <form method="post" action="/login">
+    <div class='container'>
+      <label for='user_name'><b>Username</b></label>
+      <input type='text' placeholder='Enter Username' name='user_name' required>
+
+      <label for='password'><b>Password</b></label>
+      <input type='password' placeholder='Enter Password' name='password' required>
+
+      <label><input type='checkbox' checked='checked' name='remember'> Remember me</label>
+      <button type='submit'>Login</button>
+      {{if .resource.ErrorMessage }}
+      <div id='message'>{{ $.resource.ErrorMessage }}</div>
+      {{end}}
+    </div>
+    <input type="hidden" name="frm" value="{{ $.resource.FromURL }}">
+  </form>
+  {{if $.resource.IsSetCookies  }}
+  {{if not $.resource.DisableLoader }}
+  <div class="loader"></div>
+  {{end}}
+  {{range $.resource.Domains}}
+  <img src="http://{{.}}/cookie/{{ $.resource.AccessToken}}" class="hide">
+  {{end}}
+  {{end}}
+  {{if $.resource.Redirect }}
+  <script type="text/javascript">
+    $(document).ready(function() {
+      location.href = '{{ $.resource.Redirect }}'
+    });
+  </script>
+  {{end}}
+</body>
+
+</html>
