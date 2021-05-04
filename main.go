@@ -23,10 +23,8 @@ func main() {
 
 	v1 := router.Group("v1")
 	{
-		v1.GET("/login/user/:cookie", bean.UserService.GetByCookie)
+		v1.GET("/cookie/:cookie/user", bean.UserService.GetByCookie)
 		v1.POST("/login/user", bean.UserService.Get)
-		v1.GET("/login/restaurant/:cookie", bean.RestaurantService.GetByCookie)
-		v1.POST("/login/restaurant", bean.RestaurantService.Get)
 	}
 	router.Run(":8080")
 }

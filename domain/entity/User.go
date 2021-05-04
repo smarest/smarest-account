@@ -7,14 +7,15 @@ import (
 )
 
 type User struct {
-	UserName   string          `db:"user_name" json:"userName"`
-	Role       string          `db:"role" json:"role"`
-	Password   string          `db:"password" json:"-"`
-	Name       string          `db:"name" json:"name"`
-	Available  bool            `db:"available" json:"available"`
-	SalaryType string          `db:"salary_type" json:"salaryType"`
-	JoinedDate value.DateTime  `db:"joined_date" json:"joinedDate"`
-	LeftDate   *value.DateTime `db:"left_date" json:"leftDate"`
+	UserName          string          `db:"user_name" json:"userName"`
+	RestaurantGroupID int64           `db:"restaurant_group_id" json:"restaurantGroupID"`
+	Role              string          `db:"role" json:"role"`
+	Password          string          `db:"password" json:"-"`
+	Name              string          `db:"name" json:"name"`
+	Available         bool            `db:"available" json:"available"`
+	SalaryType        string          `db:"salary_type" json:"salaryType"`
+	JoinedDate        value.DateTime  `db:"joined_date" json:"joinedDate"`
+	LeftDate          *value.DateTime `db:"left_date" json:"leftDate"`
 }
 
 func (item *User) ToSlide(fields string) map[string]interface{} {
@@ -23,6 +24,8 @@ func (item *User) ToSlide(fields string) map[string]interface{} {
 		switch field {
 		case "userName":
 			result[field] = item.UserName
+		case "restaurant_group_id":
+			result[field] = item.RestaurantGroupID
 		case "role":
 			result[field] = item.Role
 		case "name":

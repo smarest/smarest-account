@@ -65,6 +65,7 @@ func (s *UserService) Get(c *gin.Context) {
 	}
 }
 
+// Decrepcated
 func (s *UserService) GetByCookie(c *gin.Context) {
 	cookie := c.Params.ByName("cookie")
 	if cookie == "" {
